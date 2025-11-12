@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="pulse" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff00" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#004400" stop-opacity="0.4" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="36" ry="36" fill="#0b0f0c" />
+  <circle cx="120" cy="120" r="96" fill="none" stroke="url(#pulse)" stroke-width="10" stroke-dasharray="24 14">
+    <animateTransform attributeName="transform" type="rotate" from="0 120 120" to="360 120 120" dur="12s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="120" cy="120" r="62" fill="#101810" stroke="#00ff00" stroke-width="6" />
+  <path fill="#00ff00" d="M120 70c-22 0-36 18-46 30 10 12 24 30 46 30s36-18 46-30c-10-12-24-30-46-30zm0 40c-10 0-18-6-24-10 6-4 14-10 24-10s18 6 24 10c-6 4-14 10-24 10z" />
+  <g fill="#ff5f5f">
+    <circle cx="78" cy="162" r="12">
+      <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="162" cy="78" r="12">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  <path fill="#00ff00" d="M108 182h24l-12 28z" opacity="0.7" />
+</svg>
