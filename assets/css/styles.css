@@ -427,8 +427,13 @@ main {
   border-radius: 18px;
   padding: clamp(1.25rem, 2.5vw, 1.8rem);
   box-shadow: var(--shadow-card);
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   gap: 1.25rem;
+  text-align: center;
+  min-height: 440px;
   transition: transform var(--transition-base), box-shadow var(--transition-base),
     border-color var(--transition-base);
 }
@@ -440,14 +445,59 @@ main {
   border-color: rgba(0, 255, 0, 0.3);
 }
 
-.alien-card--compact {
-  grid-template-columns: min(120px, 32%) 1fr;
+.alien-card__media {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.35);
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .alien-card__media img {
-  border-radius: 14px;
-  background: rgba(0, 0, 0, 0.35);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.alien-card__media img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 14px rgba(0, 255, 0, 0.55));
+}
+
+.alien-card__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.alien-card--compact {
+  display: grid;
+  grid-template-columns: min(120px, 32%) 1fr;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: left;
+  min-height: auto;
+}
+
+.alien-card--compact .alien-card__content {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.alien-card--compact .alien-card__media {
+  aspect-ratio: 1;
+  padding: 0.75rem;
+  max-width: 140px;
+  margin: 0;
 }
 
 .alien-card__title {
