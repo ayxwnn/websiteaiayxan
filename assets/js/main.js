@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupOmnitrix();
   renderTimeline();
   setupTimelineAnimations();
+  setupAlienImageFrames();
 });
 
 function setupNavigation() {
@@ -457,4 +458,54 @@ function setupTimelineAnimations() {
   );
 
   cards.forEach((card) => observer.observe(card));
+}
+
+function setupAlienImageFrames() {
+  function wrapAlienImages(
+    selectorList = [".alien-card img", ".featured-alien img", ".omnitrix img"]
+  ) {
+    selectorList.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((img) => {
+        if (img.closest(".img-frame")) return;
+        const src = img.getAttribute("src") || img.dataset.src;
+        if (!src) return;
+
+        const frame = document.createElement("div");
+        frame.className = "img-frame";
+        frame.setAttribute("tabindex", "0");
+
+        const fill = document.createElement("div");
+        fill.className = "img-fill";
+        fill.style.backgroundImage = `url('${src}')`;
+
+        img.classList.add("origin-img");
+        const alt = img.getAttribute("alt") || img.getAttribute("aria-label") || "";
+        if (alt) {
+          frame.setAttribute("aria-label", alt);
+        }
+
+        img.parentNode.insertBefore(frame, img);
+        frame.appendChild(fill);
+        frame.appendChild(img);
+      });
+    });
+  }
+
+  try {
+    wrapAlienImages();
+    const observer = new MutationObserver((mutations) => {
+      let shouldWrap = false;
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes && mutation.addedNodes.length) {
+          shouldWrap = true;
+        }
+      });
+      if (shouldWrap) {
+        wrapAlienImages();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  } catch (error) {
+    console.error("Alien image wrapper failed: ", error);
+  }
 }
